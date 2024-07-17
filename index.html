@@ -90,7 +90,7 @@
   </style>
 </head>
 <body>
-  <div class="container" id="signUpPage">
+  <div class="container" id="signupPage">
     <div class="header">
       &#10084; <!-- Heart Icon -->
       <h1>PulsePals</h1>
@@ -99,17 +99,18 @@
     <div class="content">
       <div class="form-container">
         <h2>Sign Up for PulsePals</h2>
-        <div id="signUpError" class="alert alert-danger" style="display:none;"></div>
-        <form id="signUpForm">
+        <div id="signupError" class="alert alert-danger" style="display:none;"></div>
+        <form id="signupForm">
           <label for="email">Email:</label>
-          <input type="email" id="signUpEmail" name="email" required><br><br>
+          <input type="email" id="email" name="email" required><br><br>
           <label for="password">Password:</label>
-          <input type="password" id="signUpPassword" name="password" required><br><br>
+          <input type="password" id="password" name="password" required><br><br>
           <button type="submit" class="btn">Sign Up</button>
         </form>
       </div>
     </div>
   </div>
+
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
     import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
@@ -122,18 +123,18 @@
       storageBucket: "pulsepals-fa684.appspot.com",
       messagingSenderId: "332323808828",
       appId: "1:332323808828:web:926868c9d76ab22a8ac539",
-      measurementId: "G-ZLJM10C0BD"
+      measurementId: "G-ZLJM10C0BD" 
     };
 
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
 
-    const signUpForm = document.getElementById('signUpForm');
-    signUpForm.addEventListener('submit', (e) => {
+    const signupForm = document.getElementById('signupForm');
+    signupForm.addEventListener('submit', (e) => {
       e.preventDefault();
-      const email = signUpForm.email.value;
-      const password = signUpForm.password.value;
+      const email = signupForm.email.value;
+      const password = signupForm.password.value;
 
       createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
@@ -142,9 +143,10 @@
           window.location.href = 'https://intermission-blue.vercel.app/';
         })
         .catch((error) => {
+          const errorCode = error.code;
           const errorMessage = error.message;
-          document.getElementById('signUpError').style.display = 'block';
-          document.getElementById('signUpError').textContent = errorMessage;
+          document.getElementById('signupError').style.display = 'block';
+          document.getElementById('signupError').textContent = errorMessage;
         });
     });
   </script>
