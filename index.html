@@ -144,7 +144,14 @@
         })
         .catch((error) => {
           const errorCode = error.code;
-          const errorMessage = error.message;
+          let errorMessage = '';
+          
+          if (errorCode === 'auth/email-already-in-use') {
+            errorMessage = 'Email already in use';
+          } else {
+            errorMessage = error.message;
+          }
+          
           document.getElementById('signupError').style.display = 'block';
           document.getElementById('signupError').textContent = errorMessage;
         });
@@ -152,4 +159,5 @@
   </script>
 </body>
 </html>
+
 
